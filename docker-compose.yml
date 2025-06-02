@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  manoelspackaging.api:
+    image: ${DOCKER_REGISTRY-}manoelspackagingapi
+    build:
+      context: .
+      dockerfile: ManoelsPackaging.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver_db;Database=ManoelsPackagingDb;User ID=sa;Password=DevEnvStrongPassword!123;TrustServerCertificate=True
+    depends_on:
+      - sqlserver_db
+      
+  sqlserver_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "DevEnvStrongPassword!123"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - manoels_packaging_db_data:/var/opt/mssql
+
+volumes:
+  manoels_packaging_db_data:
