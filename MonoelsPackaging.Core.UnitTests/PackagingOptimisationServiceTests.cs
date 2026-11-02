@@ -11,8 +11,8 @@ namespace ManoelsPackaging.Core.UnitTests
     public sealed class PackagingOptimisationServiceTests
     {
         private Mock<IBoxRepository> _mockBoxRepository;
-        private Mock<ILogger<PackagingOptimisationService>> _mockLogger;
-        private PackagingOptimisationService _service;
+        private Mock<ILogger<GeometricPackagingOptimisationService>> _mockLogger;
+        private GeometricPackagingOptimisationService _service;
 
         /// <summary>
         /// Initializes common mock objects and the service instance before each test.
@@ -22,8 +22,8 @@ namespace ManoelsPackaging.Core.UnitTests
         public void TestInitialize()
         {
             _mockBoxRepository = new Mock<IBoxRepository>();
-            _mockLogger = new Mock<ILogger<PackagingOptimisationService>>();
-            _service = new PackagingOptimisationService(_mockBoxRepository.Object, _mockLogger.Object);
+            _mockLogger = new Mock<ILogger<GeometricPackagingOptimisationService>>();
+            _service = new GeometricPackagingOptimisationService(_mockBoxRepository.Object, _mockLogger.Object);
         }
 
         /// <summary>

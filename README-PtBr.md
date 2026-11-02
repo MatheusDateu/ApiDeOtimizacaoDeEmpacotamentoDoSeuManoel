@@ -101,7 +101,28 @@ A "Loja do Seu Manoel" é uma loja de jogos online que necessita automatizar o p
 3.  **Analise a Resposta:**
     A resposta será um JSON no formato `PackagingBatchResponse`, detalhando as caixas alocadas para cada pedido e os produtos contidos nelas.
 
-## 🧠 Lógica de Empacotamento Implementada (Heurística)
+## 🧠 Lógica de Empacotamento Implementada (Motor Geométrico 3D / Guilhotina Espacial)
+
+A API utiliza um **Motor de Empacotamento Geométrico Tridimensional (3D Spatial Packing Engine)** implementado no serviço `GeometricPackagingOptimisationService`, substituindo a antiga abordagem gulosa baseada apenas em soma de volumes.
+
+### Como Funciona o Algoritmo:
+1. **Representação de Espaço 3D e Coordenadas Cartesianas $(X, Y, Z)$:**
+   Cada caixa disponível é inicializada como um espaço tridimensional livre. Ao inserir um produto, o motor calcula seu posicionamento físico exato usando a coordenada de origem da caixa e cortando o volume remanescente (Guilhotina 3D) em 3 novos sub-espaços livres menores:
+   * Espaço à direita (Eixo X);
+   * Espaço acima (Eixo Y);
+   * Espaço à frente (Eixo Z).
+
+2. **Exploração de 6 Orientação/Rotações Espaciais:**
+   Para cada item testado dentro de um espaço livre, o algoritmo avalia todas as **6 permutações de rotação tridimensional** possíveis das dimensões do produto ($Altura \times Largura \times Comprimento$) para determinar se ele cabe sem colisão com as paredes da caixa ou outros itens.
+
+3. **Validação Rigorosa contra Falsos Positivos:**
+   Diferente de heurísticas baseadas puramente em capacidade volumétrica (que falham ao tentar empacotar blocos rígidos cujas dimensões ultrapassam as bordas), o motor valida a compatibilidade de formato físico e geometria real.
+
+4. **Iteração por Pedido e Escolha da Melhor Caixa:**
+   * Os produtos do pedido são ordenados decrescentemente por volume para posicionar os itens estruturais primeiro.
+   * O algoritmo testa o empacotamento em todas as caixas cadastradas no banco de dados (ordenadas da menor para a maior).
+   * É selecionada a caixa que conseguir acomodar o maior número de itens com o melhor preenchimento geométrico.
+   * Se um item não couber fisicamente em nenhuma caixa disponível (mesmo sozinho), ele é isolado com uma observação explícita de incompatibilidade de tamanho.
 
 A API utiliza a seguinte heurística para determinar o empacotamento dos produtos de cada pedido no serviço `PackagingOptimisationService`:
 1.  Os produtos de cada pedido são convertidos para entidades de domínio e inicialmente ordenados por volume, do maior para o menor. Esta lista de produtos a embalar é processada iterativamente.

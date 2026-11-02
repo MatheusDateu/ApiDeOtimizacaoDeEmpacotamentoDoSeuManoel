@@ -40,7 +40,7 @@ namespace ManoelsPackaging.Api
 
             #region Dependency Injection
             builder.Services.AddScoped<IBoxRepository, SqlBoxRepository>();
-            builder.Services.AddScoped<IPackagingOptimisationService, PackagingOptimisationService>();
+            builder.Services.AddScoped<IPackagingOptimisationService, GeometricPackagingOptimisationService>();
             #endregion
 
             var app = builder.Build();

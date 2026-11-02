@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58
+# Visual Studio Version 18
+VisualStudioVersion = 18.11.12324.101 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManoelsPackaging.Api", "ManoelsPackaging.Api\ManoelsPackaging.Api.csproj", "{E778464C-F431-4984-86B6-C6C89809326B}"
 EndProject
@@ -12,6 +12,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D43DA200-AD72-4FDC-99C5-041D51ADCBC3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{7F19A28D-BBA6-42EB-9C76-8B93BE612C61}"
+	ProjectSection(SolutionItems) = preProject
+		README-PtBr.md = README-PtBr.md
+		..\..\..\..\Downloads\README.md = ..\..\..\..\Downloads\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
